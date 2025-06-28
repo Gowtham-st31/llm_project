@@ -2,18 +2,17 @@ import streamlit as st
 from helper import extract_text_from_pdf
 from qa_chain import get_chunks, build_qa_chain
 
-st.title("📄 PDF Q&A Chatbot")
+st.title("📄 PDF Question Answering App")
 
-pdf = st.file_uploader("Upload PDF", type="pdf")
-if pdf:
-    with open("temp.pdf", "wb") as f:
-        f.write(pdf.read())
+uploaded_file = st.file_uploader("Upload a PDF", type="pdf")
 
-    text = extract_text_from_pdf("temp.pdf")
+if uploaded_file is not None:
+    text = extract_text_from_pdf(uploaded_file)
     chunks = get_chunks(text)
     qa = build_qa_chain(chunks)
 
-    question = st.text_input("Ask a question from your PDF:")
+    question = st.text_input("Ask a question about the PDF:")
+
     if question:
         answer = qa.run(question)
         st.write("Answer:", answer)
