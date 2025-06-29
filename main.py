@@ -4,7 +4,7 @@ from qa_chain import get_chunks, build_qa_chain
 
 st.set_page_config(page_title="Chat with PDF", layout="wide")
 
-st.title("📄 Chat with PDF using LLM")
+st.title("📄 Chatbot with PDF")
 
 uploaded_file = st.file_uploader("Upload your PDF", type="pdf")
 
